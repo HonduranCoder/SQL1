@@ -28,34 +28,68 @@ describe('app routes', () => {
       return client.end(done);
     });
 
-    test('returns animals', async() => {
+    test('halloween-characters', async() => {
 
       const expectation = [
         {
-          'id': 1,
-          'name': 'bessie',
-          'cool_factor': 3,
-          'owner_id': 1
-        },
+          id:1,
+          name: 'Michael Myers', 
+          movie: 'Halloween', 
+          category: 'Dangerous Men',
+          image: 'https://m.media-amazon.com/images/I/41cnyG7PO5L._AC_SS450_.jpg', 
+          owner_id:1
+        }, 
         {
-          'id': 2,
-          'name': 'jumpy',
-          'cool_factor': 4,
-          'owner_id': 1
-        },
+          id:2,
+          name:'Chuckie', 
+          movie: 'Child\'s Play', 
+          category: 'Nightmare Fuel',
+          image: 'https://alternativemovieposters.com/wp-content/uploads/2019/06/pullin_childsplay.jpg', 
+          owner_id:1
+        }, 
         {
-          'id': 3,
-          'name': 'spot',
-          'cool_factor': 10,
-          'owner_id': 1
+          id:3,
+          name: 'Pennywise', 
+          movie: 'IT', 
+          category: 'Deepest Fears',
+          image:'https://m.media-amazon.com/images/I/71b9C02hskL._AC_SY679_.jpg',
+          owner_id:1
+        }, 
+        {
+          id:4,
+          name:'Hannibal Lecter', 
+          movie: 'The Silence of the Lambs',
+          category: 'Dangerous Men',
+          image:'https://m.media-amazon.com/images/I/81SVDO6WcrL._AC_SY679_.jpg',
+          owner_id:1
+
         }
-      ];
+      ]; 
 
       const data = await fakeRequest(app)
-        .get('/animals')
+        .get('/halloween-characters')
         .expect('Content-Type', /json/)
         .expect(200);
 
+      expect(data.body).toEqual(expectation);
+    });
+    test('halloween-characters', async() => {
+
+      const expectation = 
+      {
+        id:1,
+        name: 'Michael Myers', 
+        movie: 'Halloween', 
+        category: 'Dangerous Men',
+        image: 'https://m.media-amazon.com/images/I/41cnyG7PO5L._AC_SS450_.jpg', 
+        owner_id:1
+      };
+  
+      const data = await fakeRequest(app)
+        .get('/halloween-characters/1')
+        .expect('Content-Type', /json/);
+      // .expect(200);
+  
       expect(data.body).toEqual(expectation);
     });
   });

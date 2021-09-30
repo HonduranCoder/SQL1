@@ -1,6 +1,7 @@
 require('dotenv').config();
 
 const { execSync } = require('child_process');
+const { hasUncaughtExceptionCaptureCallback } = require('process');
 
 const fakeRequest = require('supertest');
 const app = require('../lib/app');
@@ -28,7 +29,7 @@ describe('app routes', () => {
       return client.end(done);
     });
 
-    test('halloween-characters', async() => {
+    test('halloween-characters-get', async() => {
 
       const expectation = [
         {
@@ -73,7 +74,7 @@ describe('app routes', () => {
 
       expect(data.body).toEqual(expectation);
     });
-    test('halloween-characters', async() => {
+    test('halloween-characters-get-one', async() => {
 
       const expectation = 
       {
@@ -92,5 +93,83 @@ describe('app routes', () => {
   
       expect(data.body).toEqual(expectation);
     });
+    //Start tests here
+    test ('halloween-characters-post', async() => {
+
+      const expectation = 
+      {
+        id:expect.any(Number),
+        name: 'Carrie', 
+        movie: 'Carrie', 
+        category: 'Nightmare Fuel', 
+        image:'https://m.media-amazon.com/images/I/41cnyG7PO5L._AC_SS450_.jpg', 
+        owner_id:1
+      };
+  
+      const data = await fakeRequest(app)
+        .post('/halloween-characters')
+        .send({ name: 'Carrie', 
+          movie: 'Carrie', 
+          category: 'Nightmare Fuel', 
+          image:'https://m.media-amazon.com/images/I/41cnyG7PO5L._AC_SS450_.jpg', 
+        })
+        .expect('Content-Type', /json/)
+        .expect(200); 
+  
+      expect(data.body).toEqual(expectation);
+    });
+    test ('halloween-characters-put', async() => {
+
+      const expectation = 
+      {
+        id:1,
+        name: 'Michael Myers', 
+        movie: 'Halloween', 
+        category: 'Dangerous Men', 
+        image:'https://m.media-amazon.com/images/I/41cnyG7PO5L._AC_SS450_.jpg', 
+        owner_id:1
+      };
+  
+      const data = await fakeRequest(app)
+        .put('/halloween-characters/1')
+        .send({ 
+          name: 'Michael Myers', 
+          movie: 'Halloween', 
+          category: 'Dangerous Men', 
+          image:'https://m.media-amazon.com/images/I/41cnyG7PO5L._AC_SS450_.jpg', 
+        })
+        .expect('Content-Type', /json/)
+        .expect(200); 
+  
+      expect(data.body).toEqual(expectation);
+    });
+
+    {test('halloween-characters-delete', async() => {
+      const expectation = 
+        {
+          id: expect.any(Number),  
+          name: 'Michael Myers', 
+          movie: 'Halloween', 
+          category: 'Dangerous Men', 
+          image:'https://m.media-amazon.com/images/I/41cnyG7PO5L._AC_SS450_.jpg', 
+          owner_id:1
+        };
+    
+      const data = await fakeRequest(app)
+        .delete('/halloween-characters/1')
+        .expect('Content-Type', /json/)
+        .expect(200);
+    
+      expect(data.body).toEqual(expectation);
+
+      const Characters = await fakeRequest(app)
+        .get('/halloween-characters')
+        .expect('Content-Type', /json/)
+        .expect(200);
+
+      expect(Characters.body).toEqual(expect.not.arrayContaining([expectation]));
+    });
+  
   });
 });
+

@@ -144,7 +144,7 @@ describe('app routes', () => {
       expect(data.body).toEqual(expectation);
     });
 
-    {test('halloween-characters-delete', async() => {
+    test('halloween-characters-delete', async() => {
       const expectation = 
         {
           id: expect.any(Number),  
@@ -169,7 +169,6 @@ describe('app routes', () => {
 
       expect(Characters.body).toEqual(expect.not.arrayContaining([expectation]));
     });
-  
   });
 });
 

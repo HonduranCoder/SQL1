@@ -33,39 +33,38 @@ describe('app routes', () => {
 
       const expectation = [
         {
-          id:1,
-          name: 'Michael Myers', 
-          movie: 'Halloween', 
-          category: 'Dangerous Men',
-          image: 'https://m.media-amazon.com/images/I/41cnyG7PO5L._AC_SS450_.jpg', 
-          owner_id:1
-        }, 
+          'id': 4,
+          'name': 'Hannibal Lecter',
+          'movie': 'The Silence of the Lambs',
+          'category': 'Dangerous Men',
+          'image': 'https://m.media-amazon.com/images/I/81SVDO6WcrL._AC_SY679_.jpg',
+          'owner_id': 1
+        },
         {
-          id:2,
-          name:'Chuckie', 
-          movie: 'Child\'s Play', 
-          category: 'Nightmare Fuel',
-          image: 'https://alternativemovieposters.com/wp-content/uploads/2019/06/pullin_childsplay.jpg', 
-          owner_id:1
-        }, 
+          'id': 1,
+          'name': 'Michael Myers',
+          'movie': 'Halloween',
+          'category': 'Dangerous Men',
+          'image': 'https://m.media-amazon.com/images/I/41cnyG7PO5L._AC_SS450_.jpg',
+          'owner_id': 1
+        },
         {
-          id:3,
-          name: 'Pennywise', 
-          movie: 'IT', 
-          category: 'Deepest Fears',
-          image:'https://m.media-amazon.com/images/I/71b9C02hskL._AC_SY679_.jpg',
-          owner_id:1
-        }, 
+          'id': 2,
+          'name': 'Chuckie',
+          'movie': 'Child\'s Play',
+          'category': 'Nightmare Fuel',
+          'image': 'https://alternativemovieposters.com/wp-content/uploads/2019/06/pullin_childsplay.jpg',
+          'owner_id': 1
+        },
         {
-          id:4,
-          name:'Hannibal Lecter', 
-          movie: 'The Silence of the Lambs',
-          category: 'Dangerous Men',
-          image:'https://m.media-amazon.com/images/I/81SVDO6WcrL._AC_SY679_.jpg',
-          owner_id:1
-
+          'id': 3,
+          'name': 'Pennywise',
+          'movie': 'IT',
+          'category': 'Deepest Fears',
+          'image': 'https://m.media-amazon.com/images/I/71b9C02hskL._AC_SY679_.jpg',
+          'owner_id': 1
         }
-      ]; 
+      ];
 
       const data = await fakeRequest(app)
         .get('/halloween-characters')
@@ -78,12 +77,12 @@ describe('app routes', () => {
 
       const expectation = 
       {
-        id:1,
-        name: 'Michael Myers', 
-        movie: 'Halloween', 
-        category: 'Dangerous Men',
-        image: 'https://m.media-amazon.com/images/I/41cnyG7PO5L._AC_SS450_.jpg', 
-        owner_id:1
+        'id': 1,
+        'name': 'Michael Myers',
+        'movie': 'Halloween',
+        'category': 'Dangerous Men',
+        'image': 'https://m.media-amazon.com/images/I/41cnyG7PO5L._AC_SS450_.jpg',
+        'owner_id': 1
       };
   
       const data = await fakeRequest(app)
@@ -93,7 +92,9 @@ describe('app routes', () => {
   
       expect(data.body).toEqual(expectation);
     });
+
     //Start tests here (Diyana helped here)
+
     test ('halloween-characters-post', async() => {
 
       const expectation = 
@@ -101,7 +102,7 @@ describe('app routes', () => {
         id:expect.any(Number),
         name: 'Carrie', 
         movie: 'Carrie', 
-        category: 'Nightmare Fuel', 
+        category_id: 3, 
         image:'https://m.media-amazon.com/images/I/41cnyG7PO5L._AC_SS450_.jpg', 
         owner_id:1
       };
@@ -110,7 +111,7 @@ describe('app routes', () => {
         .post('/halloween-characters')
         .send({ name: 'Carrie', 
           movie: 'Carrie', 
-          category: 'Nightmare Fuel', 
+          category_id: 3, 
           image:'https://m.media-amazon.com/images/I/41cnyG7PO5L._AC_SS450_.jpg', 
         })
         .expect('Content-Type', /json/)
@@ -125,7 +126,7 @@ describe('app routes', () => {
         id:1,
         name: 'Michael Myers', 
         movie: 'Halloween', 
-        category: 'Dangerous Men', 
+        category_id: 1, 
         image:'https://m.media-amazon.com/images/I/41cnyG7PO5L._AC_SS450_.jpg', 
         owner_id:1
       };
@@ -135,7 +136,7 @@ describe('app routes', () => {
         .send({ 
           name: 'Michael Myers', 
           movie: 'Halloween', 
-          category: 'Dangerous Men', 
+          category_id: 1, 
           image:'https://m.media-amazon.com/images/I/41cnyG7PO5L._AC_SS450_.jpg', 
         })
         .expect('Content-Type', /json/)
@@ -150,7 +151,7 @@ describe('app routes', () => {
           id: expect.any(Number),  
           name: 'Michael Myers', 
           movie: 'Halloween', 
-          category: 'Dangerous Men', 
+          category_id: 1, 
           image:'https://m.media-amazon.com/images/I/41cnyG7PO5L._AC_SS450_.jpg', 
           owner_id:1
         };

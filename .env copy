@@ -1,0 +1,11 @@
+# *** Server ***
+PORT=3000
+
+# *** Database ***
+DATABASE_URL=postgres://mnoexzfxmqnrgw:bcc6a427ec56482b5991238847bba7b9448987b9418dbd54341f71605e2ef482@ec2-52-207-47-210.compute-1.amazonaws.com:5432/dqaqd85l0a72h
+
+
+PGSSLMODE=require
+
+# *** API KEYS ***
+

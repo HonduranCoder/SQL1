@@ -124,7 +124,7 @@ describe('app routes', () => {
 
       const expectation = 
       {
-        id:1,
+        id:5,
         name: 'Michael Myers', 
         movie: 'Halloween', 
         category_id: 1, 
@@ -133,7 +133,7 @@ describe('app routes', () => {
       };
   
       const data = await fakeRequest(app)
-        .put('/halloween-characters/1')
+        .put('/halloween-characters/5')
         .send({ 
           name: 'Michael Myers', 
           movie: 'Halloween', 
@@ -148,8 +148,8 @@ describe('app routes', () => {
 
     test('halloween-characters-delete', async() => {
       const expectation = 
-        {
-          id: expect.any(Number),  
+        {         
+          id:5,
           name: 'Michael Myers', 
           movie: 'Halloween', 
           category_id: 1, 
@@ -158,7 +158,7 @@ describe('app routes', () => {
         };
     
       const data = await fakeRequest(app)
-        .delete('/halloween-characters/1')
+        .delete('/halloween-characters/5')
         .expect('Content-Type', /json/)
         .expect(200);
     

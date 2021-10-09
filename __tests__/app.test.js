@@ -85,7 +85,7 @@ describe('app routes', () => {
         'image': 'https://m.media-amazon.com/images/I/41cnyG7PO5L._AC_SS450_.jpg',
         'owner_id': 1
       };
-  
+
       const data = await fakeRequest(app)
         .get('/halloween-characters/1')
         .expect('Content-Type', /json/);
